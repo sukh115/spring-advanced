@@ -30,7 +30,7 @@ public class UserService {
 
         user.validateNewPassword(userChangePasswordRequest.getOldPassword(), userChangePasswordRequest.getNewPassword(), passwordEncoder);
 
-        user.validateCurrentPassword(userChangePasswordRequest.getOldPassword(), userChangePasswordRequest.getNewPassword(), passwordEncoder);
+        user.validateCurrentPassword(userChangePasswordRequest.getOldPassword(), passwordEncoder);
 
         user.changePassword(passwordEncoder.encode(userChangePasswordRequest.getNewPassword()));
     }

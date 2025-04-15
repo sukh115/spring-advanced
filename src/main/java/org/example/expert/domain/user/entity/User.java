@@ -54,7 +54,7 @@ public class User extends Timestamped {
         }
     }
 
-    public void validateCurrentPassword(String oldPassword, String newPassword, PasswordEncoder passwordEncoder) {
+    public void validateCurrentPassword(String oldPassword, PasswordEncoder passwordEncoder) {
         if (!passwordEncoder.matches(oldPassword, this.password))
             throw new InvalidRequestException("잘못된 비밀번호 입니다");
     }
