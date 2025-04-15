@@ -28,5 +28,7 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
                 .orElseThrow(() -> new InvalidRequestException("Todo not found"));
     }
 
-
+    default Todo findByIdOrThrow(Long id) {
+        return findById(id).orElseThrow(() -> new InvalidRequestException("Manager not found"));
+    }
 }

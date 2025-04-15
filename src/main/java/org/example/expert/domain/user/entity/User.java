@@ -8,6 +8,7 @@ import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.entity.Timestamped;
 import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.util.ObjectUtils;
 
 @Getter
 @Entity
@@ -57,4 +58,11 @@ public class User extends Timestamped {
         if (!passwordEncoder.matches(oldPassword, this.password))
             throw new InvalidRequestException("잘못된 비밀번호 입니다");
     }
+
+    public void validateNotSelf(User targetUser) {
+        if (ObjectUtils.nullSafeEquals(this.id, targetUser.getId())) {
+            throw new InvalidRequestException("일정 작성자는 본인을 담당자로 등록할 수 없습니다.");
+        }
+    }
+
 }

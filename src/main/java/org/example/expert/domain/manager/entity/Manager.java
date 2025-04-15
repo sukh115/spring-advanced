@@ -3,8 +3,10 @@ package org.example.expert.domain.manager.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.user.entity.User;
+import org.springframework.util.ObjectUtils;
 
 @Getter
 @Entity
@@ -26,4 +28,18 @@ public class Manager {
         this.user = user;
         this.todo = todo;
     }
+
+    public void validateDuplicateManager(User user) {
+        if (this.user.getId().equals(user.getId())) {
+            throw new InvalidRequestException("이미 등록된 담당자입니다.");
+        }
+    }
+
+    public void validateBelongsTo(Todo targetTodo) {
+        if (!ObjectUtils.nullSafeEquals(this.todo.getId(), targetTodo.getId())) {
+            throw new InvalidRequestException("해당 일정에 등록된 담당자가 아닙니다.");
+        }
+    }
+
+
 }
