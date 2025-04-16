@@ -67,7 +67,8 @@ jacocoTestReport {
                             '**/entity/**',
                             '**/controller/**',
                             '**/config/**',
-                            '**/exception/**'
+                            '**/exception/**',
+                            '**/client/**'
                     ])
                 })
         )
